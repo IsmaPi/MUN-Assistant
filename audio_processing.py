@@ -3,6 +3,7 @@ import random
 import numpy as np
 import scipy.io.wavfile as wav
 import os
+from pydub import AudioSegment
 
 def record_snippet(duration : int) -> str:
     # Set the sample rate and the number of channels for the audio capture
@@ -31,6 +32,12 @@ def record_snippet(duration : int) -> str:
 
     # Save the audio data to a WAV file
     wav.write(filename, sample_rate, audio_data)
+
+    # Transform the WAV file to a mp3 file
+
+    new_name = filename.replace('.wav', '.mp3')
+
+    filename = AudioSegment.from_wav(filename).export(f"{new_name}", format='mp3')
 
     # Return the file path
     return os.path.abspath(filename)
