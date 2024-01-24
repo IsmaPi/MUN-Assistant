@@ -3,6 +3,8 @@ import random
 import numpy as np
 import scipy.io.wavfile as wav
 import os
+import whisper
+model = whisper.load_model("base")
 
 def record_snippet(duration : int) -> str:
     # Set the sample rate and the number of channels for the audio capture
@@ -22,9 +24,12 @@ def record_snippet(duration : int) -> str:
     # Create a stream to capture audio
     stream = sd.InputStream(callback=callback, channels=channels, samplerate=sample_rate)
 
+    print("Recording...")
     # Start the audio stream and record for the specified duration
     with stream:
         sd.sleep(duration * 1000)
+
+    print("Finished recording.")
 
     # Convert the buffer to a NumPy array
     audio_data = np.concatenate(buffer, axis=0)
@@ -35,3 +40,26 @@ def record_snippet(duration : int) -> str:
     # Return the file path
     return os.path.abspath(filename)
 
+def transcribe(audio_file: str) -> str: # ?
+    result = model.transcribe(audio_file)
+    return result["text"]
+
+
+def classify(transcription: str) -> str or None:
+    keyword = 'floor is yours'
+    if keyword in transcription.lower():
+        return 'floor.given'
+    return None
+
+
+def AudioProcessingComponentPipeline(time : int) -> str or None:
+    io_pipeline = [
+        record_snippet,
+        transcribe,
+        classify
+    ]
+
+    nxt = time
+    while io_pipeline:
+        nxt = io_pipeline.pop(0)(nxt)
+    return nxt

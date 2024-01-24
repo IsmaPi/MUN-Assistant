@@ -8,6 +8,19 @@ Project:
     Name: Audio Processing
     Description: >
       Handles the processing of audio input, including speech recognition and command classification.
+    P_RecordSnippet:
+      Name: Record Snippet
+      Description: Records a snippet of audio
+      Input:
+        Name: duration
+        Type: Number
+        Description: The duration of the audio snippet
+        Value: 5
+      Output:
+        Name: audio
+        Type: String
+        Description: The audio file
+        Value: "audio.wav"
     P_Recognize:
       Name: Recognize
       Description: Recognizes the speech and returns the recognized text
@@ -36,7 +49,7 @@ Project:
         Value: "FLOOR.USA"
 
     GLUE:
-      Graph: P_Recognize -> P_Classify
+      Graph: P_RecordSnippet -> P_Recognize -> P_Classify
       Description: Connects the recognition process to the command classification
 
   C_ConferenceManagement:
