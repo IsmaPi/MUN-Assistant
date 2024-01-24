@@ -1,0 +1,107 @@
+Project:
+  Name: "MUN Conference Whisper Command Recognition"
+  Description: >
+    An easy way to keep track of people’s speeches, recognition by the chairs, motions proposed, and more. 
+    A tool to make moderating easier and allow them to make the most out of their and delegates' times.
+
+  C_AudioProcessing:
+    Name: Audio Processing
+    Description: >
+      Handles the processing of audio input, including speech recognition and command classification.
+    P_Recognize:
+      Name: Recognize
+      Description: Recognizes the speech and returns the recognized text
+      Input:
+        Name: audio
+        Type: String
+        Description: The audio file to be recognized
+        Value: "audio.wav"
+      Output:
+        Name: recognizedText
+        Type: String
+        Description: The recognized text
+        Value: "Hello, my name is John Doe"
+    P_Classify:
+      Name: Classify
+      Description: Classifies the recognized text into a command
+      Input:
+        Name: recognizedText
+        Type: String
+        Description: The recognized text
+        Value: "... is the reason why. The delegate of the United States has the floor."
+      Output:
+        Name: command
+        Type: String
+        Description: The classified command
+        Value: "FLOOR.USA"
+    GLUE:
+      Graph: P_Recognize -> P_Classify
+      Description: Connects the recognition process to the command classification
+
+  C_ConferenceManagement:
+    Name: Conference Management
+    Description: >
+      Manages various aspects of the conference, including handling commands, managing the speaker list, and processing motions.
+    P_HandleCommand:
+      Name: Handle Command
+      Description: Handles the classified command and determines the appropriate action
+      Input:
+        Name: command
+        Type: String
+        Description: The classified command
+        Value: "FLOOR.USA"
+      Output:
+        Name: action
+        Type: String
+        Description: The action to be performed
+        Value: "Delegate of the United States has the floor."
+    P_UpdateSpeakersList:
+      Name: Update Speakers List
+      Description: Updates the speakers list based on classified commands
+      Input:
+        Name: command
+        Type: String
+        Description: Command indicating a speaker addition or removal
+        Value: "ADD_SPEAKER.USA"
+      Output:
+        Name: speakerListUpdate
+        Type: String
+        Description: Update action for the speakers list
+        Value: "Added USA to speakers list."
+    P_HandleMotion:
+      Name: Handle Motion
+      Description: Processes and logs motions proposed by delegates
+      Input:
+        Name: command
+        Type: String
+        Description: Command indicating a motion
+        Value: "MOTION.USA.2MIN"
+      Output:
+        Name: motionProcessed
+        Type: String
+        Description: The processed motion
+        Value: "Processed 2-minute motion from USA."
+    GLUE:
+      Graph: P_HandleCommand -> P_UpdateSpeakersList -> P_HandleMotion
+      Description: Connects command handling, speaker list updating, and motion processing
+
+  C_TimeManagement:
+    Name: Time Management
+    Description: >
+      Manages the time for each speech and session in the conference.
+    P_ManageTime:
+      Name: Time Management
+      Description: Manages and logs time for speeches and sessions
+      Input:
+        Name: command
+        Type: String
+        Description: Command to start, stop, or update time
+        Value: "TIME_START.USA"
+      Output:
+        Name: timeStatus
+        Type: String
+        Description: The status of the time management
+        Value: "Time started for USA's speech."
+    GLUE:
+      Graph: P_ManageTime
+      Description: Connects time management to the overall system
