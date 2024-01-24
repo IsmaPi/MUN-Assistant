@@ -40,5 +40,5 @@ def record_snippet(duration : int) -> str:
     filename = AudioSegment.from_wav(filename).export(f"{new_name}", format='mp3')
 
     # Return the file path
-    return os.path.abspath(filename)
+    return os.path.abspath(new_name)
 
