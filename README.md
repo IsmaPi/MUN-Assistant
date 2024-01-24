@@ -14,9 +14,9 @@ Welcome to MUN-Assistant, the ultimate tool crafted to revolutionize the Model U
 - **🔊 Real-Time Assistance**: Designed to provide real-time support, MUN-Assistant listens in during committee sessions, offering immediate assistance to chairs and delegates.
 
 
-![GitHub issues](https://img.shields.io/github/issues/yourusername/MUN-Assistant)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/MUN-Assistant)
-![GitHub stars](https://img.shields.io/github/stars/yourusername/MUN-Assistant)
-![GitHub license](https://img.shields.io/github/license/yourusername/MUN-Assistant)
-![Language count](https://img.shields.io/github/languages/count/yourusername/MUN-Assistant)
-![Top language](https://img.shields.io/github/languages/top/yourusername/MUN-Assistant)
+![GitHub issues](https://img.shields.io/github/issues/IsmaPi/MUN-Assistant)
+![GitHub forks](https://img.shields.io/github/forks/IsmaPi/MUN-Assistant)
+![GitHub stars](https://img.shields.io/github/stars/IsmaPi/MUN-Assistant)
+![GitHub license](https://img.shields.io/github/license/IsmaPi/MUN-Assistant)
+![Language count](https://img.shields.io/github/languages/count/IsmaPi/MUN-Assistant)
+![Top language](https://img.shields.io/github/languages/top/IsmaPi/MUN-Assistant)
